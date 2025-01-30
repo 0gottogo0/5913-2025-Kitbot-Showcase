@@ -23,14 +23,8 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-
-    driverController.povUp().whileTrue(drivetrain.runEnd(
-      () -> drivetrain.MoveForword(),
-      () -> drivetrain.Stop()));
-
-    driverController.povDown().whileTrue(drivetrain.runEnd(
-      () -> drivetrain.MoveBack(),
-      () -> drivetrain.Stop()));
+    driverController.button(8).whileFalse(drivetrain.run(
+      () -> drivetrain.Move(driverController.getLeftY(), driverController.getLeftX())));
   }
 
   /**

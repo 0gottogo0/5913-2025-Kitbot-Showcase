@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -45,24 +46,10 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void MoveForword() {
-    driveLeftFront.set(ControlMode.PercentOutput, 0.2);
-    driveLeftBack.set(ControlMode.PercentOutput, 0.2);
-    driveRightFront.set(ControlMode.PercentOutput, 0.2);
-    driveRightBack.set(ControlMode.PercentOutput, 0.2);
-  }
-
-  public void MoveBack() {
-    driveLeftFront.set(ControlMode.PercentOutput, -0.2);
-    driveLeftBack.set(ControlMode.PercentOutput, -0.2);
-    driveRightFront.set(ControlMode.PercentOutput, -0.2);
-    driveRightBack.set(ControlMode.PercentOutput, -0.2);
-  }
-
-  public void Stop() {
-    driveLeftFront.set(ControlMode.PercentOutput, 0);
-    driveLeftBack.set(ControlMode.PercentOutput, 0);
-    driveRightFront.set(ControlMode.PercentOutput, 0);
-    driveRightBack.set(ControlMode.PercentOutput, 0);
+  public void Move(double forword, double rotate) {
+    driveLeftFront.set(ControlMode.PercentOutput, (forword + rotate) * Constants.maxSpeed);
+    driveLeftBack.set(ControlMode.PercentOutput, (forword + rotate) * Constants.maxSpeed);
+    driveRightFront.set(ControlMode.PercentOutput, (forword - rotate) * Constants.maxSpeed);
+    driveRightBack.set(ControlMode.PercentOutput, (forword - rotate) * Constants.maxSpeed);
   }
 }
